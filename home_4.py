@@ -1,10 +1,24 @@
-# Задайте список из N элементов, заполненных числами из промежутка [-N, N]. 
+# Задайте список из N элементов, заполненных числами из промежутка [-N, N].
 # Найдите произведение элементов на указанных позициях.
 # Позиции хранятся в файле file.txt в одной строке одно число.
 
-with open("num.txt","r") as pos:
+from random import randint
+
+n = int(input("Введите целое число "))
+
+with open("num.txt", "w") as pos:           # запись чисел в файл num.txt 
+    for i in range(n):
+        x = randint(-n, n)
+        pos.write(f"{x}\n")
+
+with open("num.txt", "r") as pos:
     num_text = pos.read()
 
 num_text = num_text.split()
-num_map = list(map(float,num_text))
-print(num_text,sum(num_map))
+product = 1
+for i in range(len(num_text)):
+    num_text[i] = int(num_text[i])          # превращение строк в целые  числа
+    product *= num_text[i]
+
+print(f"Произведение элементов данного списка {num_text} равно  {product} ")
+
